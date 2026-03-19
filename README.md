@@ -1,1 +1,1 @@
-I complete assignment 5 about RegEx
+I complete Practice6 about builtin functions and file handing
