@@ -1,1 +1,1 @@
-I complete Practice6 about builtin functions and file handing
+ Practice7&8 - Phonebook with PostgreSQL
