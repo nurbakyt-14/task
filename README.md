@@ -1,1 +1,2 @@
- Practice7&8 - Phonebook with PostgreSQL
+ Practice 8 - PostgreSQL functions and procedures
+ 
