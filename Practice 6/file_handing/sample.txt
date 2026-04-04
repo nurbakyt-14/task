@@ -1,0 +1,3 @@
+Hello World
+This is Practice 6
+Python file handling example
