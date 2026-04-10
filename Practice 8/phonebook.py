@@ -28,11 +28,23 @@ class PhoneBook:
             return []
     
     def get_paginated(self, page_num=1, page_size=10):
-        """Get paginated list"""
+
         try:
-            self.cursor.execute("SELECT * FROM get_contacts_paginated(%s, %s);", 
-                               (page_num, page_size))
-            return self.cursor.fetchall()
+            self.cursor.execute(
+                "SELECT * FROM get_contacts_paginated(%s, %s);", 
+                (page_num, page_size)
+            )
+            results = self.cursor.fetchall()
+        
+        
+            if page_size == 0:
+                print(f"📋 Showing ALL contacts: {len(results)} total")
+            else:
+                if results:
+                    total = results[0][4] if results else 0
+                    print(f"📋 Page {page_num} ({len(results)}/{total}):")
+        
+            return results
         except Exception as e:
             print(f"Pagination error: {e}")
             return []
@@ -41,7 +53,9 @@ class PhoneBook:
         """Get all contacts"""
         try:
             self.cursor.execute("SELECT * FROM get_all_contacts();")
-            return self.cursor.fetchall()
+            rows = self.cursor.fetchall()
+            print(f"Found{len(rows)} contacts")
+            return rows
         except Exception as e:
             print(f"Error: {e}")
             return []
@@ -95,18 +109,6 @@ class PhoneBook:
         except Exception as e:
             self.conn.rollback()
             print(f"✗ Error: {e}")
-            return False
-    
-    def delete_contact(self, name=None, surname=None, phone=None):
-        """Delete a contact"""
-        try:
-            self.cursor.execute("CALL delete_contact(%s, %s, %s);", 
-                               (name, surname, phone))
-            self.conn.commit()
-            return True
-        except Exception as e:
-            self.conn.rollback()
-            print(f"✗ Delete error: {e}")
             return False
     
     def clear_all(self):
@@ -189,15 +191,24 @@ def main():
                 pb.delete_contact(name=name)
                 
         elif choice == '6':
-            # Sample data
-            sample_contacts = [
-                ["Test1", "User1", "+77771112233"],
-                ["Test2", "User2", "invalid_phone"],
-                ["Test3", "User3", "+77774445566"],
-                ["Ernar", "Aidar", "+77011234567"],
-            ]
-            print("Adding sample contacts...")
-            pb.insert_many_contacts(sample_contacts)
+            print("\n📝 ")
+    
+            contacts_to_add = []
+    
+            while True:
+                name = input("Name: ").strip()
+                surname = input("Surname: ").strip()
+                phone = input("Phone: ").strip()
+        
+                if not phone:
+                    print("Contacts Added!")
+                    break
+        
+                contacts_to_add.append([name, surname, phone])
+                print(f"✅ {name} {surname} added\n")
+    
+            if contacts_to_add:
+                pb.insert_many_contacts(contacts_to_add)
             
         elif choice == '7':
             confirm = input("Delete all contacts? (y/n): ")

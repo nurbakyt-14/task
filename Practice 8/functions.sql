@@ -37,14 +37,22 @@ AS $$
 DECLARE
     offset_val INTEGER;
 BEGIN
-    offset_val := (p_page_num - 1) * p_page_size;
-    
-    RETURN QUERY
-    SELECT c.id, c.name, c.surname, c.phone,
-           (SELECT COUNT(*) FROM contacts) AS total_count
-    FROM contacts c
-    ORDER BY c.surname, c.name
-    LIMIT p_page_size OFFSET offset_val;
+    IF p_page_size = 0 THEN
+        RETURN QUERY
+        SELECT c.id, c.name, c.surname, c.phone,
+               (SELECT COUNT(*) FROM contacts) AS total_count
+        FROM contacts c
+        ORDER BY c.surname, c.name;
+    ELSE
+        offset_val := (p_page_num - 1) * p_page_size;
+        
+        RETURN QUERY
+        SELECT c.id, c.name, c.surname, c.phone,
+               (SELECT COUNT(*) FROM contacts) AS total_count
+        FROM contacts c
+        ORDER BY c.surname, c.name
+        LIMIT p_page_size OFFSET offset_val;
+    END IF;
 END;
 $$;
 
