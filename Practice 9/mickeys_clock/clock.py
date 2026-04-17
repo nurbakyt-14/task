@@ -35,7 +35,6 @@ class MickeyClock:
         right_rotated = pygame.transform.rotate(self.right_hand, -minute_angle)
         left_rotated = pygame.transform.rotate(self.left_hand, -second_angle)
         
-        # Қолдың ТҮБІ центрде тұруы үшін орнын түзету
         right_rect = right_rotated.get_rect(center=(self.center[0], self.center[1] + self.hand_offset_y))
         left_rect = left_rotated.get_rect(center=(self.center[0], self.center[1] + self.hand_offset_y))
         
