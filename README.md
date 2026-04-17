@@ -1,2 +1,2 @@
- Practice 8 - PostgreSQL functions and procedures
+ Practice 9 - Pygame assignments
  
