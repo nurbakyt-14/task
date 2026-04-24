@@ -43,7 +43,7 @@ DISPLAYSURF.fill(WHITE)
 pygame.display.set_caption("Game")
 
 
-# enemy classx
+# класс врага
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -98,6 +98,8 @@ class Coin(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (30, 30))
 
         self.rect = self.image.get_rect()
+
+        # сразу ставим монету в случайное место
         self.respawn()
 
     def respawn(self):
@@ -107,7 +109,10 @@ class Coin(pygame.sprite.Sprite):
         )
 
     def move(self):
+        # монета падает вниз
         self.rect.move_ip(0, 4)
+
+        # если ушла вниз, создаем заново
         if self.rect.top > SCREEN_HEIGHT:
             self.respawn()
 
@@ -117,6 +122,7 @@ P1 = Player()
 E1 = Enemy()
 C1 = Coin()
 
+# группы
 enemies = pygame.sprite.Group()
 enemies.add(E1)
 
@@ -128,7 +134,7 @@ all_sprites.add(P1)
 all_sprites.add(E1)
 all_sprites.add(C1)
 
-# increase speed
+# событие для увеличения скорости
 INC_SPEED = pygame.USEREVENT + 1
 pygame.time.set_timer(INC_SPEED, 1000)
 
@@ -141,29 +147,29 @@ while True:
             pygame.quit()
             sys.exit()
 
-    # draw background
+    # рисуем фон
     DISPLAYSURF.blit(background, (0, 0))
 
-    # show score
+    # показываем score слева сверху
     scores = font_small.render("Score: " + str(SCORE), True, BLACK)
     DISPLAYSURF.blit(scores, (10, 10))
 
-    # show coins
+    # показываем coins справа сверху
     coins_text = font_small.render("Coins: " + str(COINS), True, BLACK)
     coin_rect = coins_text.get_rect(topright=(SCREEN_WIDTH - 10, 10))
     DISPLAYSURF.blit(coins_text, coin_rect)
 
-    # draw and move sprites
+    # двигаем и рисуем все спрайты
     for entity in all_sprites:
         entity.move()
         DISPLAYSURF.blit(entity.image, entity.rect)
 
-    # if player collide coin(collect)
+    # если игрок собрал монету
     if pygame.sprite.spritecollideany(P1, coins):
         COINS += 1
         C1.respawn()
 
-    # if collide with enemy
+    # если столкновение с врагом
     if pygame.sprite.spritecollideany(P1, enemies):
         pygame.mixer.music.stop() 
         pygame.mixer.Sound("crash.wav").play()
@@ -181,5 +187,6 @@ while True:
         pygame.quit()
         sys.exit()
 
+    # обновляем экран
     pygame.display.update()
     FramePerSec.tick(FPS)
