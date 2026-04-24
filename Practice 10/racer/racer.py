@@ -17,7 +17,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 # screen size
-SCREEN_WIDTH = 600
+SCREEN_WIDTH = 400
 SCREEN_HEIGHT = 600
 
 # enemy speed
