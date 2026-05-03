@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Miras Nurbolatuly",
+    "email": "miras@gmail.com",
+    "birthday": "1990-05-15",
+    "group": "Work",
+    "phones": [
+      {
+        "phone": "+77051234567",
+        "type": "mobile"
+      },
+      {
+        "phone": "+77051234568",
+        "type": "work"
+      }
+    ]
+  },
+  {
+    "name": "Nurbakyt Tolepbergen",
+    "email": "nurbakyt@yahoo.com",
+    "birthday": "1988-03-22",
+    "group": "Work",
+    "phones": [
+      {
+        "phone": "+77057654321",
+        "type": "mobile"
+      }
+    ]
+  },
+  {
+    "name": "Ernar",
+    "email": null,
+    "birthday": null,
+    "group": "mobile",
+    "phones": [
+      {
+        "phone": "87471197943",
+        "type": "work"
+      },
+      {
+        "phone": "87776665544",
+        "type": "mobile"
+      }
+    ]
+  },
+  {
+    "name": "Ali Armanov",
+    "email": "ali@gmail.com",
+    "birthday": "1995-12-10",
+    "group": "Family",
+    "phones": [
+      {
+        "phone": "+77059876543",
+        "type": "home"
+      },
+      {
+        "phone": "+77051234999",
+        "type": "work"
+      }
+    ]
+  }
+]
