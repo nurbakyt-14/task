@@ -1,4 +1,3 @@
-# connect.py
 import psycopg2
 from config import DB_CONFIG
 
